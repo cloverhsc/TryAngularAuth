@@ -1,11 +1,13 @@
+import { AuthPatientService } from './service/auth-patient.service';
+import { AuthAdminService } from './service/auth-admin.service';
+import { Acct2Module } from './acct2/acct2.module';
+import { Acct1Module } from './acct1/acct1.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Acct1RoutingModule } from './acct1/acct1-routing.module';
-import { Acct2RoutingModule } from './acct2/acct2-routing.module';
 import { LoginComponent } from './login/login.component';
 
 import { AuthGuardService } from './service/auth-guard.service';
@@ -20,12 +22,14 @@ import { AuthenticationService } from './service/authentication.service';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    Acct1RoutingModule,
-    Acct2RoutingModule
+    Acct1Module,
+    Acct2Module
   ],
   providers: [
     AuthGuardService,
-    AuthenticationService
+    AuthenticationService,
+    AuthAdminService,
+    AuthPatientService
   ],
   bootstrap: [AppComponent]
 })

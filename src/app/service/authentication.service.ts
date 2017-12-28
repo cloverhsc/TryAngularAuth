@@ -1,21 +1,13 @@
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AuthenticationService {
 
-  private resp = {
-    token: '',
-    types: ''
-  };
+  private resp = new Resp();
   constructor() { }
 
-  login(acc: string, pwd: string) {
-    let obj = {
-      token: '',
-      types: ''
-    };
+  login(acc: string, pwd: string): Observable<Resp> {
     // if ( acc === 'clover@example.com' && pwd === 'clover') {
     //   obj = {
     //     token: 'revolc',
@@ -31,17 +23,27 @@ export class AuthenticationService {
     // } else {
     //   return obj;
     // }
-      if ( acc === 'clover@example.com' && pwd === 'clover') {
-        obj = {
-          token: 'revolc',
-          types: 'admin'
-        };
-      } else if ( acc === 'hsc@example.com' && pwd === 'hscc') {
-        obj = {
-          token: 'ccsh',
-          types: 'patient'
-        };
-      }
-      return obj;
+
+    if ( acc === 'clover@example.com' && pwd === 'clover') {
+      this.resp.token = 'revolc';
+      this.resp.types = 'admin';
+      this.resp.result = 'success';
+    } else if ( acc === 'hsc@example.com' && pwd === 'hscc') {
+      this.resp.token = 'ccsh';
+      this.resp.types = 'patient';
+      this.resp.result = 'success';
+    }
+    return Observable.of(this.resp).delay(2000);
+  }
+}
+
+export class Resp {
+  token: string;
+  types: string;
+  result: string;
+  constructor() {
+    this.token = '';
+    this.types = '';
+    this.result = 'failed';
   }
 }

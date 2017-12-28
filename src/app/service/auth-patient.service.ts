@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs/Rx';
 import { AuthenticationService } from './authentication.service';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthPatientService implements CanActivate {
 
   constructor(
     private authService: AuthenticationService,
@@ -14,11 +14,10 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): Observable<boolean> {
     const ident = JSON.parse(String(localStorage.getItem('test')));
-    if (ident.token) {
+    if (ident.types === 'patient') {
       return Observable.of(true);
     } else {
       return Observable.of(false);
     }
   }
-
 }
